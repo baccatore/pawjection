@@ -53,4 +53,4 @@ This is a sandbox web application for exploring DevSecOps practices. I'll try to
 - `wrangler.jsonc` - Cloudflare Workers configuration
 - `vitest.config.mts` - Test configuration
 
-Code QL TEST
+CodeQL TEST
