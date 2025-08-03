@@ -13,14 +13,8 @@
 
 export default {
 	async fetch(request, env, ctx): Promise<Response> {
-		const url = new URL(request.url);
-		switch (url.pathname) {
-			case '/message':
-				return new Response('Hello, World!');
-			case '/random':
-				return new Response(crypto.randomUUID());
-			default:
-				return new Response('Not Found', { status: 404 });
-		}
+		// The worker will serve static files from the public directory
+		// as configured in wrangler.jsonc with the assets directory
+		return env.ASSETS.fetch(request);
 	},
 } satisfies ExportedHandler<Env>;
