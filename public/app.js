@@ -390,6 +390,40 @@ function initializeQuiz() {
   QuizState.personalityCode = '';
   QuizState.currentBreed = null;
   
+  // Restore quiz content structure if it was replaced by loading state
+  const quizContent = document.querySelector('.quiz-content');
+  if (!document.getElementById('question-container')) {
+    quizContent.innerHTML = `
+      <!-- Progress Indicator -->
+      <div class="progress-container">
+        <div class="progress-bar">
+          <div id="progress-fill" class="progress-fill"></div>
+        </div>
+        <p id="progress-text" class="progress-text">Question 1 of 8</p>
+      </div>
+
+      <!-- Question Container -->
+      <div id="question-container" class="question-container">
+        <h2 id="question-text" class="question-text"></h2>
+        <div id="answers-container" class="answers-container">
+          <button id="answer-a" class="btn btn-answer" data-answer="A"></button>
+          <button id="answer-b" class="btn btn-answer" data-answer="B"></button>
+        </div>
+      </div>
+    `;
+    
+    // Re-cache the restored elements
+    elements.progressFill = document.getElementById('progress-fill');
+    elements.progressText = document.getElementById('progress-text');
+    elements.questionText = document.getElementById('question-text');
+    elements.answerButtons.A = document.getElementById('answer-a');
+    elements.answerButtons.B = document.getElementById('answer-b');
+    
+    // Re-attach event listeners to the new buttons
+    elements.answerButtons.A.addEventListener('click', () => trackAnswer('A'));
+    elements.answerButtons.B.addEventListener('click', () => trackAnswer('B'));
+  }
+  
   showScreen('quiz');
   displayQuestion();
 }
