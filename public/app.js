@@ -161,7 +161,7 @@ const dogBreeds = {
   },
   'ILFC': {
     name: 'Chow Chow',
-    description: 'Dignified, cat-like dogs who bond with one person. They\'re naturally aloof and prefer to observe rather than participate, living life on their own terms.',
+    description: "Dignified, cat-like dogs who bond with one person. They're naturally aloof and prefer to observe rather than participate, living life on their own terms.",
     traits: {
       dependency: 'Independent - Aloof and self-contained',
       sociality: 'Loyal - One-person dogs',
