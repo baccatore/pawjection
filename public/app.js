@@ -61,7 +61,7 @@ const elements = {
 const dogBreeds = {
   'ASFC': {
     name: 'Cavalier King Charles Spaniel',
-    description: 'Gentle, affectionate companions who thrive on human interaction. They\'re social butterflies who enjoy meeting new friends but prefer a calm, relaxed lifestyle.',
+    description: "Gentle, affectionate companions who thrive on human interaction. They're social butterflies who enjoy meeting new friends but prefer a calm, relaxed lifestyle.",
     imageUrl: 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=400&h=400&fit=crop',
     traits: {
       dependency: 'Affectionate - Craves physical closeness and attention',
@@ -160,7 +160,7 @@ const dogBreeds = {
   },
   'ISFE': {
     name: 'Siberian Husky',
-    description: 'Pack-oriented workers who are friendly but independent. They\'ll greet everyone enthusiastically but won\'t beg for attention, preferring adventure to cuddles.',
+    description: "Pack-oriented workers who are friendly but independent. They'll greet everyone enthusiastically but won't beg for attention, preferring adventure to cuddles.",
     imageUrl: 'https://images.unsplash.com/photo-1605568427561-40dd23c2acea?w=400&h=400&fit=crop',
     traits: {
       dependency: 'Independent - Self-reliant and confident',
@@ -193,7 +193,7 @@ const dogBreeds = {
   },
   'ILFC': {
     name: 'Chow Chow',
-    description: 'Dignified, cat-like dogs who bond with one person. They\'re naturally aloof and prefer to observe rather than participate, living life on their own terms.',
+    description: "Dignified, cat-like dogs who bond with one person. They're naturally aloof and prefer to observe rather than participate, living life on their own terms.",
     imageUrl: 'https://images.unsplash.com/photo-1596836587841-8b23eaeb5816?w=400&h=400&fit=crop',
     traits: {
       dependency: 'Independent - Aloof and self-contained',
@@ -242,7 +242,7 @@ const questions = [
   {
     id: 1,
     axis: 'dependency',
-    question: 'When you\'re feeling down, do you prefer to...',
+    question: "When you're feeling down, do you prefer to...",
     options: {
       A: {
         text: 'Seek comfort and cuddles from loved ones',
