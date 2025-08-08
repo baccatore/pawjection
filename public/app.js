@@ -32,6 +32,7 @@ const elements = {
   questionText: document.getElementById('question-text'),
   
   // Results Elements
+  resultsTitle: document.getElementById('results-title'),
   breedName: document.getElementById('breed-name'),
   breedImage: document.getElementById('breed-image'),
   breedDescription: document.getElementById('breed-description'),
@@ -202,10 +203,11 @@ const dogBreeds = {
       energy: 'Calm - Low activity needs'
     }
   },
+  // Easter Egg: This one's actually a cat breed - for those who read the code
   'ILFE': {
-    name: 'Shiba Inu',
-    description: 'The cat of the dog world - independent, loyal to their chosen person, and full of personality. They have energy to burn but only when they feel like it.',
-    imageUrl: 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=400&h=400&fit=crop',
+    name: 'Chartreux',
+    description: 'Quiet and intelligent with a gentle disposition. Independent yet loyal to their chosen person, they have bursts of playful energy between contemplative moments.',
+    imageUrl: 'https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=400&h=400&fit=crop',
     traits: {
       dependency: 'Independent - Self-sufficient and aloof',
       sociality: 'Loyal - Bonds with select few',
@@ -590,6 +592,19 @@ function showResults() {
   
   if (QuizState.currentBreed) {
     const breed = QuizState.currentBreed;
+    
+    // Easter Egg: Update title and emoji for Chartreux (cat breed)
+    if (elements.resultsTitle) {
+      if (breed.name === 'Chartreux') {
+        elements.resultsTitle.textContent = 'Your inner cat is...';
+        const breedEmoji = document.querySelector('.breed-emoji');
+        if (breedEmoji) breedEmoji.textContent = '🐱';
+      } else {
+        elements.resultsTitle.textContent = 'Your inner dog is...';
+        const breedEmoji = document.querySelector('.breed-emoji');
+        if (breedEmoji) breedEmoji.textContent = '🐕';
+      }
+    }
     
     // Display breed information
     elements.breedName.textContent = breed.name;
