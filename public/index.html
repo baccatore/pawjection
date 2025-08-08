@@ -15,7 +15,7 @@
 				<h1 class="app-title">🐾 Pawjection 🐾</h1>
 				<p class="tagline">Discover your inner dog breed!</p>
 				<p class="description">
-					Answer 4 simple questions about your personality and find out which of 16 dog breeds matches your unique traits.
+					Answer 8 questions about your personality and find out which of 16 dog breeds matches your unique traits with better accuracy!
 				</p>
 				<button id="start-button" class="btn btn-primary">
 					Start Quiz
@@ -51,6 +51,7 @@
 				<h2 class="results-title">Your inner dog is...</h2>
 				<div id="breed-reveal" class="breed-reveal">
 					<h1 id="breed-name" class="breed-name"></h1>
+					<img id="breed-image" class="breed-image" alt="Dog breed" />
 					<div id="breed-emoji" class="breed-emoji">🐕</div>
 				</div>
 				<p id="breed-description" class="breed-description"></p>
@@ -61,11 +62,50 @@
 					<ul id="traits-list" class="traits-list"></ul>
 				</div>
 
+				<!-- Share Section -->
+				<div id="share-section" class="share-section">
+					<h3>Share Your Result</h3>
+					<div class="share-buttons">
+						<button id="share-twitter" class="btn btn-share">🐦 Twitter</button>
+						<button id="share-facebook" class="btn btn-share">📘 Facebook</button>
+						<button id="share-copy" class="btn btn-share">📋 Copy Link</button>
+					</div>
+				</div>
+
 				<button id="retake-button" class="btn btn-primary">
 					Take Quiz Again
 				</button>
+				
+				<!-- Additional Options -->
+				<div class="options-section">
+					<button id="view-stats" class="btn btn-secondary">View Statistics</button>
+					<button id="explore-breeds" class="btn btn-secondary">Explore All Breeds</button>
+				</div>
 			</div>
 		</section>
+		
+		<!-- Statistics Modal -->
+		<div id="stats-modal" class="modal">
+			<div class="modal-content">
+				<span id="close-modal" class="close-modal">&times;</span>
+				<h2>Quiz Statistics</h2>
+				<div id="stats-content" class="stats-content">
+					<p id="total-quizzes">Total quizzes taken: <span>0</span></p>
+					<h3>Most Common Breeds:</h3>
+					<ul id="breed-stats" class="breed-stats"></ul>
+					<button id="clear-stats" class="btn btn-secondary">Clear Statistics</button>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Breeds Explorer Modal -->
+		<div id="breeds-modal" class="modal">
+			<div class="modal-content modal-large">
+				<span id="close-breeds-modal" class="close-modal">&times;</span>
+				<h2>All Dog Breeds</h2>
+				<div id="breeds-grid" class="breeds-grid"></div>
+			</div>
+		</div>
 	</div>
 
 	<script src="app.js"></script>
