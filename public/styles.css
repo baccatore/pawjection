@@ -59,13 +59,27 @@ body {
 
 /* Screen Management */
 .screen {
-  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  animation: fadeIn var(--transition-normal);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(20px);
+  transition: opacity var(--transition-normal), transform var(--transition-normal), visibility 0s var(--transition-normal);
 }
 
 .screen.active {
-  display: block;
+  position: relative;
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+  transition: opacity var(--transition-normal), transform var(--transition-normal), visibility 0s;
+}
+
+.screen.fade-out {
+  opacity: 0;
+  transform: translateX(-20px);
 }
 
 @keyframes fadeIn {
@@ -79,6 +93,28 @@ body {
   }
 }
 
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 /* Welcome Screen */
 .welcome-content {
   text-align: center;
@@ -86,6 +122,7 @@ body {
   padding: var(--spacing-xl);
   border-radius: var(--radius-lg);
   box-shadow: 0 4px 6px var(--shadow);
+  animation: fadeInUp 0.6s ease;
 }
 
 .app-title {
@@ -216,6 +253,7 @@ body {
   color: var(--white);
   border-color: var(--accent-color);
   animation: pulse 0.3s ease;
+  transform: translateX(4px);
 }
 
 .btn-answer:disabled {
@@ -226,6 +264,40 @@ body {
 @keyframes pulse {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.02); }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Loading Container */
@@ -272,12 +344,15 @@ body {
 
 .breed-reveal {
   margin-bottom: var(--spacing-lg);
+  animation: fadeInUp 0.8s ease;
 }
 
 .breed-name {
   font-size: 2.5rem;
   color: var(--primary-color);
   margin-bottom: var(--spacing-sm);
+  animation: fadeInScale 0.8s ease;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .breed-image {
@@ -360,27 +435,101 @@ body {
 }
 
 /* Mobile Responsiveness */
-@media (max-width: 480px) {
-  .app-title {
-    font-size: 2rem;
+@media (max-width: 768px) {
+  .app-container {
+    padding: var(--spacing-sm);
   }
   
   .welcome-content,
   .quiz-content,
   .results-content {
     padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+  }
+  
+  .app-title {
+    font-size: 2.25rem;
+  }
+  
+  .tagline {
+    font-size: 1.1rem;
   }
   
   .question-text {
-    font-size: 1.25rem;
+    font-size: 1.35rem;
   }
   
   .breed-name {
-    font-size: 2rem;
+    font-size: 2.25rem;
+  }
+  
+  .share-buttons {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+  
+  .share-buttons .btn {
+    width: 100%;
+  }
+  
+  .modal-content {
+    width: 95%;
+    max-height: 90vh;
+    margin: 5% auto;
+  }
+  
+  .breeds-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: var(--spacing-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .app-title {
+    font-size: 1.875rem;
+  }
+  
+  .welcome-content,
+  .quiz-content,
+  .results-content {
+    padding: var(--spacing-sm);
+  }
+  
+  .question-text {
+    font-size: 1.15rem;
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .breed-name {
+    font-size: 1.75rem;
   }
   
   .btn {
     width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+  
+  .btn-answer {
+    padding: var(--spacing-sm);
+    font-size: 0.95rem;
+  }
+  
+  .breed-image {
+    max-width: 250px;
+    height: 250px;
+  }
+  
+  .options-section {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+  
+  .options-section .btn {
+    width: 100%;
+  }
+  
+  .breeds-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -452,6 +601,28 @@ button:focus {
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Loading overlay for transitions */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.loading-overlay.active {
+  opacity: 1;
+  visibility: visible;
 }
 
 /* Modal Styles */

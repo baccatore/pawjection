@@ -363,23 +363,40 @@ const questions = [
 
 // Screen Navigation Functions
 function showScreen(screenName) {
-  // Hide all screens
-  document.querySelectorAll('.screen').forEach(screen => {
-    screen.classList.remove('active');
-  });
+  const currentScreen = document.querySelector('.screen.active');
+  let targetScreen;
   
-  // Show requested screen
+  // Determine target screen
   switch(screenName) {
     case 'welcome':
-      elements.welcomeScreen.classList.add('active');
+      targetScreen = elements.welcomeScreen;
       break;
     case 'quiz':
-      elements.quizScreen.classList.add('active');
+      targetScreen = elements.quizScreen;
       break;
     case 'results':
-      elements.resultsScreen.classList.add('active');
+      targetScreen = elements.resultsScreen;
       break;
   }
+  
+  if (!targetScreen) return;
+  
+  // If no current screen, just show the target
+  if (!currentScreen) {
+    targetScreen.classList.add('active');
+    return;
+  }
+  
+  // Smooth transition between screens
+  currentScreen.classList.add('fade-out');
+  
+  setTimeout(() => {
+    currentScreen.classList.remove('active', 'fade-out');
+    targetScreen.classList.add('active');
+    
+    // Scroll to top for mobile
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, 300);
 }
 
 // Quiz Initialization
@@ -500,8 +517,14 @@ function showLoadingState() {
   const quizContent = document.querySelector('.quiz-content');
   quizContent.innerHTML = `
     <div class="loading-container">
+      <div class="paw-loader">
+        <span class="paw-print">🐾</span>
+        <span class="paw-print">🐾</span>
+        <span class="paw-print">🐾</span>
+      </div>
       <div class="loading-spinner"></div>
       <p class="loading-text">Analyzing your personality...</p>
+      <p style="color: #999; font-size: 0.9rem; margin-top: 10px;">Finding your perfect match...</p>
     </div>
   `;
 }
@@ -798,11 +821,76 @@ function setupEventListeners() {
   });
 }
 
+// Test Function - Verifies all 16 personality outcomes
+function testAllPersonalities() {
+  console.log('Testing all 16 personality combinations...');
+  const allCodes = Object.keys(dogBreeds);
+  let testResults = [];
+  
+  allCodes.forEach(code => {
+    const breed = dogBreeds[code];
+    if (breed && breed.name && breed.description && breed.imageUrl && breed.traits) {
+      testResults.push({
+        code: code,
+        status: '✅ Valid',
+        breed: breed.name
+      });
+    } else {
+      testResults.push({
+        code: code,
+        status: '❌ Invalid',
+        missing: []
+      });
+      if (!breed.name) testResults[testResults.length - 1].missing.push('name');
+      if (!breed.description) testResults[testResults.length - 1].missing.push('description');
+      if (!breed.imageUrl) testResults[testResults.length - 1].missing.push('imageUrl');
+      if (!breed.traits) testResults[testResults.length - 1].missing.push('traits');
+    }
+  });
+  
+  console.table(testResults);
+  
+  // Test specific code combinations
+  const testCombinations = [
+    { answers: {1: 'A', 2: 'A', 3: 'A', 4: 'A'}, expected: 'ASFC' },
+    { answers: {1: 'A', 2: 'A', 3: 'A', 4: 'B'}, expected: 'ASFE' },
+    { answers: {1: 'A', 2: 'A', 3: 'B', 4: 'A'}, expected: 'ASWC' },
+    { answers: {1: 'A', 2: 'A', 3: 'B', 4: 'B'}, expected: 'ASWE' },
+    { answers: {1: 'A', 2: 'B', 3: 'A', 4: 'A'}, expected: 'ALFC' },
+    { answers: {1: 'A', 2: 'B', 3: 'A', 4: 'B'}, expected: 'ALFE' },
+    { answers: {1: 'A', 2: 'B', 3: 'B', 4: 'A'}, expected: 'ALWC' },
+    { answers: {1: 'A', 2: 'B', 3: 'B', 4: 'B'}, expected: 'ALWE' },
+    { answers: {1: 'B', 2: 'A', 3: 'A', 4: 'A'}, expected: 'ISFC' },
+    { answers: {1: 'B', 2: 'A', 3: 'A', 4: 'B'}, expected: 'ISFE' },
+    { answers: {1: 'B', 2: 'A', 3: 'B', 4: 'A'}, expected: 'ISWC' },
+    { answers: {1: 'B', 2: 'A', 3: 'B', 4: 'B'}, expected: 'ISWE' },
+    { answers: {1: 'B', 2: 'B', 3: 'A', 4: 'A'}, expected: 'ILFC' },
+    { answers: {1: 'B', 2: 'B', 3: 'A', 4: 'B'}, expected: 'ILFE' },
+    { answers: {1: 'B', 2: 'B', 3: 'B', 4: 'A'}, expected: 'ILWC' },
+    { answers: {1: 'B', 2: 'B', 3: 'B', 4: 'B'}, expected: 'ILWE' }
+  ];
+  
+  console.log('\nTesting personality code calculation...');
+  testCombinations.forEach(test => {
+    QuizState.answers = test.answers;
+    calculateResults();
+    const result = QuizState.personalityCode === test.expected ? '✅' : '❌';
+    console.log(`${result} Answers: ${JSON.stringify(test.answers)} => ${QuizState.personalityCode} (Expected: ${test.expected})`);
+  });
+  
+  console.log('\nAll 16 personality outcomes have been tested!');
+  return testResults;
+}
+
 // Initialize App
 function init() {
   console.log('Pawjection app initialized');
   setupEventListeners();
   showScreen('welcome');
+  
+  // Add test command to console
+  window.testPersonalities = testAllPersonalities;
+  console.log('💡 Tip: Run testPersonalities() in the console to test all 16 outcomes');
 }
 
 // Start the app when DOM is loaded
