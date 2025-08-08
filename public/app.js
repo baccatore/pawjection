@@ -41,7 +41,7 @@ const elements = {
 const dogBreeds = {
   'ASFC': {
     name: 'Cavalier King Charles Spaniel',
-    description: 'Gentle, affectionate companions who thrive on human interaction. They\'re social butterflies who enjoy meeting new friends but prefer a calm, relaxed lifestyle.',
+    description: "Gentle, affectionate companions who thrive on human interaction. They're social butterflies who enjoy meeting new friends but prefer a calm, relaxed lifestyle.",
     traits: {
       dependency: 'Affectionate - Craves physical closeness and attention',
       sociality: 'Social - Friendly toward strangers and new environments',
