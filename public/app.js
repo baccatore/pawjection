@@ -32,6 +32,7 @@ const elements = {
   questionText: document.getElementById('question-text'),
   
   // Results Elements
+  resultsTitle: document.querySelector('.results-title'),
   breedName: document.getElementById('breed-name'),
   breedImage: document.getElementById('breed-image'),
   breedDescription: document.getElementById('breed-description'),
@@ -591,6 +592,19 @@ function showResults() {
   
   if (QuizState.currentBreed) {
     const breed = QuizState.currentBreed;
+    
+    // Easter Egg: Update title and emoji for Chartreux (cat breed)
+    if (elements.resultsTitle) {
+      if (breed.name === 'Chartreux') {
+        elements.resultsTitle.textContent = 'Your inner cat is...';
+        const breedEmoji = document.querySelector('.breed-emoji');
+        if (breedEmoji) breedEmoji.textContent = '🐱';
+      } else {
+        elements.resultsTitle.textContent = 'Your inner dog is...';
+        const breedEmoji = document.querySelector('.breed-emoji');
+        if (breedEmoji) breedEmoji.textContent = '🐕';
+      }
+    }
     
     // Display breed information
     elements.breedName.textContent = breed.name;
