@@ -94,7 +94,9 @@ Pawjection is a **Cloudflare Workers web application** that serves as a DevSecOp
 /
 ├── .github/                 # GitHub workflows and configurations
 │   └── workflows/claude.yml # Claude AI assistant integration
-├── .vscode/                 # VS Code settings
+├── .claude/                 # Claude Code agent configurations
+│   ├── agents/             # Custom agent definitions
+│   └── records/            # Agent interaction records
 ├── public/                  # Static web assets (served by worker)
 │   ├── index.html          # Main quiz interface
 │   ├── app.js              # Frontend JavaScript logic
