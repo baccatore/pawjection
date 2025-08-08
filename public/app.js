@@ -206,7 +206,7 @@ const dogBreeds = {
   // Easter Egg: This one's actually a cat breed - for those who read the code
   'ILFE': {
     name: 'Chartreux',
-    description: 'Quiet, intelligent felines with a gentle disposition. Independent yet loyal to their chosen person, they have bursts of playful energy between their contemplative moments.',
+    description: 'Quiet and intelligent with a gentle disposition. Independent yet loyal to their chosen person, they have bursts of playful energy between contemplative moments.',
     imageUrl: 'https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=400&h=400&fit=crop',
     traits: {
       dependency: 'Independent - Self-sufficient and aloof',
