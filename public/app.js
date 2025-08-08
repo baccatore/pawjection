@@ -206,7 +206,7 @@ const questions = [
   {
     id: 1,
     axis: 'dependency',
-    question: 'When you\'re feeling down, do you prefer to...',
+    question: "When you're feeling down, do you prefer to...",
     options: {
       A: {
         text: 'Seek comfort and cuddles from loved ones',
