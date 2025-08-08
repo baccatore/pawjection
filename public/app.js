@@ -131,7 +131,7 @@ const dogBreeds = {
   },
   'ISFE': {
     name: 'Siberian Husky',
-    description: 'Pack-oriented workers who are friendly but independent. They\'ll greet everyone enthusiastically but won\'t beg for attention, preferring adventure to cuddles.',
+    description: "Pack-oriented workers who are friendly but independent. They'll greet everyone enthusiastically but won't beg for attention, preferring adventure to cuddles.",
     traits: {
       dependency: 'Independent - Self-reliant and confident',
       sociality: 'Social - Enjoys pack activities',
