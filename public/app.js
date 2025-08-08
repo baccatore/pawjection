@@ -604,7 +604,7 @@ function showResults() {
         const breedEmoji = document.querySelector('.breed-emoji');
         if (breedEmoji) breedEmoji.textContent = '🐕';
       }
-    updateResultsForBreed(breed);
+    }
     
     // Display breed information
     elements.breedName.textContent = breed.name;
