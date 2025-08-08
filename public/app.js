@@ -207,7 +207,7 @@ const dogBreeds = {
   'ILFE': {
     name: 'Chartreux',
     description: 'Quiet, intelligent felines with a gentle disposition. Independent yet loyal to their chosen person, they have bursts of playful energy between their contemplative moments.',
-    imageUrl: 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=400&h=400&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=400&h=400&fit=crop',
     traits: {
       dependency: 'Independent - Self-sufficient and aloof',
       sociality: 'Loyal - Bonds with select few',
