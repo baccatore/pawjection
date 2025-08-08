@@ -32,7 +32,7 @@ const elements = {
   questionText: document.getElementById('question-text'),
   
   // Results Elements
-  resultsTitle: document.querySelector('.results-title'),
+  resultsTitle: document.getElementById('results-title'),
   breedName: document.getElementById('breed-name'),
   breedImage: document.getElementById('breed-image'),
   breedDescription: document.getElementById('breed-description'),
