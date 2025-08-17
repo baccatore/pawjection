@@ -41,21 +41,8 @@ const elements = {
   // Share Elements
   shareTwitter: document.getElementById('share-twitter'),
   shareFacebook: document.getElementById('share-facebook'),
+  shareInstagram: document.getElementById('share-instagram'),
   shareCopy: document.getElementById('share-copy'),
-  
-  // Statistics Elements
-  viewStatsButton: document.getElementById('view-stats'),
-  statsModal: document.getElementById('stats-modal'),
-  closeModal: document.getElementById('close-modal'),
-  totalQuizzes: document.querySelector('#total-quizzes span'),
-  breedStats: document.getElementById('breed-stats'),
-  clearStatsButton: document.getElementById('clear-stats'),
-  
-  // Breeds Explorer Elements
-  exploreBreedsButton: document.getElementById('explore-breeds'),
-  breedsModal: document.getElementById('breeds-modal'),
-  closeBreedsModal: document.getElementById('close-breeds-modal'),
-  breedsGrid: document.getElementById('breeds-grid')
 };
 
 // Dog Breeds Data Structure - All 16 personality combinations
@@ -654,6 +641,39 @@ function shareOnFacebook() {
   window.open(facebookUrl, '_blank', 'width=600,height=400');
 }
 
+function shareOnInstagram() {
+  const breed = QuizState.currentBreed;
+  if (breed) {
+    const text = `I just found out my inner dog breed is a ${breed.name}! 🐾 Take the Pawjection quiz to discover yours! ${window.location.href}`;
+    
+    // Copy text to clipboard
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text)
+        .then(() => {
+          // Show success message
+          const btn = elements.shareInstagram;
+          const originalText = btn.textContent;
+          btn.textContent = '✅ Copied!';
+          setTimeout(() => {
+            btn.textContent = originalText;
+          }, 2000);
+          
+          // Open Instagram in new tab
+          window.open('https://www.instagram.com/', '_blank');
+        })
+        .catch(err => {
+          console.error('Failed to copy:', err);
+          // Fallback: just open Instagram
+          window.open('https://www.instagram.com/', '_blank');
+        });
+    } else {
+      // Fallback for older browsers
+      alert('Text copied! Now open Instagram and paste it in your story or post.');
+      window.open('https://www.instagram.com/', '_blank');
+    }
+  }
+}
+
 function copyShareLink() {
   const breed = QuizState.currentBreed;
   if (breed) {
@@ -815,6 +835,7 @@ function setupEventListeners() {
   // Share buttons
   if (elements.shareTwitter) elements.shareTwitter.addEventListener('click', shareOnTwitter);
   if (elements.shareFacebook) elements.shareFacebook.addEventListener('click', shareOnFacebook);
+  if (elements.shareInstagram) elements.shareInstagram.addEventListener('click', shareOnInstagram); // Added for Instagram
   if (elements.shareCopy) elements.shareCopy.addEventListener('click', copyShareLink);
   
   // Statistics buttons

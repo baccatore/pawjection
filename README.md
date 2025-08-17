@@ -52,3 +52,60 @@ This is a sandbox web application for exploring DevSecOps practices. I'll try to
 - `/test` - Test files
 - `wrangler.jsonc` - Cloudflare Workers configuration
 - `vitest.config.mts` - Test configuration
+
+---
+
+# pawjection（日本語版）
+
+これはDevSecOpsの実践を探求するためのサンドボックスWebアプリケーションです。メインブランチは常にクリーンな状態を保つよう努めますが、他のブランチで作業する際は特に注意を払ってください。そしてもちろん、自分自身、友達、家族を様々な犬種と比較して楽しんでください！🐾
+
+## 前提条件
+
+- Node.js（v16以上）
+- npmまたはyarn
+- Cloudflareアカウント（無料プランで可）
+
+## はじめに
+
+1. リポジトリをクローン：
+   ```bash
+   git clone git@github.com:baccatore/pawjection.git
+   cd pawjection
+   ```
+
+2. 依存関係をインストール：
+   ```bash
+   npm install
+   ```
+
+3. Cloudflareにログイン（初回のみ）：
+   ```bash
+   npx wrangler login
+   ```
+
+## 開発コマンド
+
+| コマンド | 説明 |
+|---------|-------------|
+| `npm run dev` | ローカル開発サーバーをhttp://localhost:8787で起動 |
+| `npm run deploy` | ビルドしてCloudflare Workersにデプロイ |
+| `npm run test` | Vitestを使用してテストを実行 |
+| `npm run cf-typegen` | wrangler設定からTypeScript型を生成 |
+
+### 開発ワークフロー
+
+1. **ローカル開発**: `npm run dev`を実行して開発サーバーを起動します。変更を行うとワーカーは自動的にリロードされます。
+
+2. **テスト**: `npm run test`を実行してテストスイートを実行します。テストはCloudflare Workers環境で実行するように設定されています。
+
+3. **型生成**: `wrangler.jsonc`を修正した後、`npm run cf-typegen`を実行して環境バインディングのTypeScript型を再生成します。
+
+4. **デプロイ**: `npm run deploy`を実行してワーカーをCloudflareのエッジネットワークにデプロイします。
+
+## プロジェクト構造
+
+- `/src` - Cloudflare Workerのソースコード
+- `/public` - ワーカーが提供する静的アセット
+- `/test` - テストファイル
+- `wrangler.jsonc` - Cloudflare Workers設定
+- `vitest.config.mts` - テスト設定
