@@ -14,11 +14,9 @@ function Question({ question, onAnswer }: QuestionProps) {
     setSelectedAnswer(answer)
     setIsDisabled(true)
     
-    setTimeout(() => {
-      onAnswer(answer)
-      setSelectedAnswer(null)
-      setIsDisabled(false)
-    }, 300)
+    onAnswer(answer)
+    setSelectedAnswer(null)
+    setIsDisabled(false)
   }
 
   return (
