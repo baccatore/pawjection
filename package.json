@@ -4,8 +4,11 @@
 	"private": true,
 	"scripts": {
 		"deploy": "wrangler deploy",
-		"dev": "wrangler dev",
-		"start": "wrangler dev",
+		"dev": "vite",
+		"build": "tsc && vite build",
+		"preview": "vite preview",
+		"dev:worker": "wrangler dev",
+		"start": "vite",
 		"test": "vitest",
 		"cf-typegen": "wrangler types"
 	},
