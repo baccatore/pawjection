@@ -11,7 +11,7 @@ interface ResultsScreenProps {
   onExploreBreeds: () => void
 }
 
-function ResultsScreen({ breed, personalityCode, onRetake, onShowStats, onExploreBreeds }: ResultsScreenProps) {
+function ResultsScreen({ breed, onRetake, onShowStats, onExploreBreeds }: ResultsScreenProps) {
   const isChartreux = breed.name === 'Chartreux'
   
   return (

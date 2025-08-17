@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-import { QuizState, Trait } from '../../types/quiz.types'
+import { useState } from 'react'
+import { QuizState } from '../../types/quiz.types'
 import { questions } from '../../data/questions'
 import ProgressBar from '../quiz/ProgressBar'
 import Question from '../quiz/Question'
