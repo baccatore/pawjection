@@ -15,6 +15,9 @@ export default {
 	async fetch(request, env, ctx): Promise<Response> {
 		// The worker will serve static files from the public directory
 		// as configured in wrangler.jsonc with the assets directory
+		if (request.method === "POST") {
+			return env.PASSWORD;
+		}
 		return env.ASSETS.fetch(request);
 	},
 } satisfies ExportedHandler<Env>;
